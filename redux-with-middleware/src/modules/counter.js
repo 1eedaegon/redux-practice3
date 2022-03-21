@@ -1,5 +1,5 @@
 import { createAction, handleActions } from 'redux-actions';
-import { delay, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { delay, put, select, takeEvery, takeLatest } from 'redux-saga/effects';
 
 const INCREASE = 'counter/INCREASE';
 const DECREASE = 'counter/DECREASE';
@@ -14,6 +14,8 @@ export const decreaseAsync = createAction(DECREASE_ASYNC);
 function* increaseSaga() {
   yield delay(1000);
   yield put(increase());
+  const number = yield select((state) => state.counter);
+  console.log(`Current state number is: ${number}`);
 }
 function* decreaseSaga() {
   yield delay(1000);
